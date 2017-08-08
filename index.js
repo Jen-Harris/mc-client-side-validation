@@ -18,8 +18,9 @@ function passwordCheck() {
   var password = document.getElementById('password').value;
   var confirmPassword = document.getElementById('confirmPassword').value;
   var email = document.getElementById('email').value;
+    var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (password === '' || confirmPassword === '') {
-      if (email===''){
+      if (email==='' || !regex.test(email)){
       var br = document.createElement('br');
       errorMessage.appendChild(br);
       var emptyPassword = document.createTextNode("Please enter your password");
@@ -29,9 +30,16 @@ function passwordCheck() {
       errorMessage.appendChild(emptyPassword)
       }
     } else if (password !== confirmPassword) {
+      if(email ===''|| !regex.test(email)){
+        var br = document.createElement('br');
+        errorMessage.appendChild(br);
+        var passwordMatchError= document.createTextNode("Your passwords don't match. Please try again");
+        errorMessage.appendChild(passwordMatchError)
+      } else {
       var passwordMatchError = document.createTextNode("Your passwords don't match. Please try again");
       errorMessage.appendChild(passwordMatchError);
     }
+  }
 }
 
 
